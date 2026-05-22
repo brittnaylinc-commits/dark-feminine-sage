@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e0c992;
+  --burgundy: #7c2d3e;
+  --burgundy-light: #a63d52;
+  --obsidian: #0d0a0e;
+  --void: #110d12;
+  --surface: #1a1520;
+  --card: #211b27;
+  --border: #2e2535;
+  --mist: #9b8ab4;
+  --sage: #8e9e7a;
+  --rose: #b87c8a;
+  --text: #e8dff0;
+  --muted: #9e8fb0;
+  --subtle: #6b5f7a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--obsidian);
+  color: var(--text);
+  font-family: var(--font-body), sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--subtle); }
+
+/* ─── Typography ─────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display), serif; }
+
+h1, h2, h3 { font-family: var(--font-display), serif; }
+
+/* ─── Card base ──────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.card-hover {
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card-hover:hover {
+  border-color: rgba(201,169,110,0.3);
+  transform: translateY(-1px);
+}
+
+/* ─── Gold accent line ───────────────────────────────────────────── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+/* ─── Grain overlay ──────────────────────────────────────────────── */
+.grain-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Glow effects ───────────────────────────────────────────────── */
+.glow-gold { box-shadow: 0 0 20px rgba(201,169,110,0.15); }
+.glow-burgundy { box-shadow: 0 0 20px rgba(124,45,62,0.2); }
+.glow-mist { box-shadow: 0 0 20px rgba(155,138,180,0.15); }
+
+/* ─── Input styles ───────────────────────────────────────────────── */
+.input-dark {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 10px 14px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.input-dark:focus {
+  border-color: rgba(201,169,110,0.5);
+}
+.input-dark::placeholder {
+  color: var(--subtle);
+}
+
+/* ─── Button styles ──────────────────────────────────────────────── */
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--obsidian);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-gold:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--subtle);
+}
+
+/* ─── Progress bar ───────────────────────────────────────────────── */
+.progress-track {
+  background: var(--surface);
+  border-radius: 99px;
+  overflow: hidden;
+  height: 6px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.5s ease;
+}
+
+/* ─── Fade-in animation ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+.fade-up-1 { animation: fadeUp 0.4s 0.05s ease both; }
+.fade-up-2 { animation: fadeUp 0.4s 0.1s ease both; }
+.fade-up-3 { animation: fadeUp 0.4s 0.15s ease both; }
+.fade-up-4 { animation: fadeUp 0.4s 0.2s ease both; }
+.fade-up-5 { animation: fadeUp 0.4s 0.25s ease both; }
+
+/* ─── Pulse glow ─────────────────────────────────────────────────── */
+@keyframes pulseGold {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.pulse-gold { animation: pulseGold 2s ease-in-out infinite; }
+
+/* ─── Checkbox custom ────────────────────────────────────────────── */
+.custom-check {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-check:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.custom-check:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--obsidian);
+  font-size: 11px;
+  font-weight: 700;
+}
+.custom-check:hover { border-color: var(--muted); }
+
+/* ─── Tag pill ───────────────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── Tab nav ────────────────────────────────────────────────────── */
+.tab-active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+.tab-inactive {
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+}
+.tab-inactive:hover { color: var(--text); }
